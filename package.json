@@ -23,16 +23,18 @@
     "index.ts"
   ],
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
     "astro": "astro",
+    "dev": "astro telemetry disable && astro dev",
+    "start": "astro telemetry disable && astro dev",
+    "build": "astro telemetry disable && astro build",
+    "preview": "astro preview",
     "publish:patch": "npm version patch && npm publish --access public",
-    "publish:minor": "npm version minor && npm publish --access public"
+    "publish:minor": "npm version minor && npm publish --access public",
+    "prepare": "husky"
   },
   "devDependencies": {
-    "devalue": "^5.1.1"
+    "devalue": "^5.1.1",
+    "husky": "^9.1.7"
   },
   "peerDependencies": {
     "astro": "^5"
