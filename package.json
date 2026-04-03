@@ -1,10 +1,10 @@
 {
   "name": "@ayco/astro-resume",
   "author": "Ayo Ayco",
-  "homepage": "https://ayco.io/sh/astro-resume",
+  "homepage": "https://ayco.io/n/astro-resume",
   "repository": {
     "type": "git",
-    "url": "https://git.sr.ht/~ayoayco/astro-resume"
+    "url": "https://github.com/ayo-run/astro-resume"
   },
   "type": "module",
   "version": "0.4.3",
