@@ -28,15 +28,16 @@
     "start": "astro telemetry disable && astro dev",
     "build": "astro telemetry disable && astro build",
     "preview": "astro preview",
+    "build:preview": "npm run build && npm run preview",
     "publish:patch": "npm version patch && npm publish --access public",
     "publish:minor": "npm version minor && npm publish --access public",
     "prepare": "husky"
   },
   "devDependencies": {
-    "devalue": "^5.1.1",
+    "devalue": "^5.6.4",
     "husky": "^9.1.7"
   },
   "peerDependencies": {
-    "astro": "^5"
+    "astro": "^6"
   }
 }

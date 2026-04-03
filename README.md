@@ -1,6 +1,3 @@
-> [!NOTE]
-> This project moved to [SourceHut](https://git.sr.ht/~ayoayco/astro-resume).
-
 # Astro Resume
 
 [![Package information: NPM version](https://img.shields.io/npm/v/@ayco/astro-resume)](https://www.npmjs.com/package/@ayco/astro-resume)
@@ -106,6 +103,7 @@ If you have shared data that needs to be initialized from the server and accesse
 In this example, an appConfig object is built and serialized in index.astro and accessed in child Astro components.
 
 In index.astro:
+
 ```astro
 import Serialize from "@ayco/astro-resume";
 
@@ -120,6 +118,7 @@ export type AppConfig = typeof appConfig;
 ```
 
 In Child.astro:
+
 ```astro
 <h1>I'm a child. I have access to the appConfig in index!</h1>
 <GrandChild />
@@ -133,6 +132,7 @@ const data = deserialize<AppConfig>('app-config');
 ```
 
 In GrandChild.astro:
+
 ```astro
 <h1>I'm a grand child. I also have access to the appConfig in index!</h1>
 <script>
@@ -177,6 +177,7 @@ console.log(now instanceof Date); // true
 ## Errors & Warning in `deserialize()`
 
 The `deserialize()` function may give you the following:
+
 1. **ERR: No match found** - there are no `JSON` scripts with the given ID
 1. **WARNING: Multiple matches for <id>** - there were multiple `JSON` scripts found with the same ID
 

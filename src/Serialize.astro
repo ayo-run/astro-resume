@@ -2,35 +2,38 @@
 // type Primitive = string | number | boolean | null | undefined;
 
 export interface Props {
-    /**
-     * The id that the client script will pass to the `deserialize()` function
-     */
-    id: string;
-    /**
-     * The data to be serialized and accessed in the client script with `deserialize()`
-     */
-    data: Record<string, any>;
-    /**
-     * Custom serializer to be used
-     * @param data 
-     */
-    use?: (data: Record<string, any>) => string;
+  /**
+   * The id that the client script will pass to the `deserialize()` function
+   */
+  id: string;
+  /**
+   * The data to be serialized and accessed in the client script with `deserialize()`
+   */
+  data: Record<string, any>;
+  /**
+   * Custom serializer to be used
+   * @param data
+   */
+  use?: (data: Record<string, any>) => string;
 }
-const {id, data, use} = Astro.props;
-let serializedData = '{}'
+const { id, data, use } = Astro.props;
+let serializedData = "{}";
 try {
-    serializedData = use ? use(data) : JSON.stringify(data);
-} catch(err) {
-    /**
-     *  ERR: data is unserializable
-     *  - You might need a custom serializer/parser for complex data
-     *  - Usage examples in 👉 https://git.sr.ht/~ayoayco/astro-resume#astro-resume
-     */
-    throw Error(`astro-resume ERR: Data unserializable
+  serializedData = use ? use(data) : JSON.stringify(data);
+} catch (err) {
+  /**
+   *  ERR: data is unserializable
+   *  - You might need a custom serializer/parser for complex data
+   *  - Usage examples in 👉 https://ayco.io/gh/astro-resume#usage
+   */
+  throw Error(
+    `astro-resume ERR: Data unserializable
 - You might need a custom serializer/parser for complex data
-- Usage examples in 👉 https://git.sr.ht/~ayoayco/astro-resume#astro-resume
-    `, err)
+- Usage examples in 👉 https://ayco.io/gh/astro-resume#usage
+    `,
+    err,
+  );
 }
 ---
 
-<script type="application/json" id={id} set:html={serializedData}></script>
+<script type="application/json" id={id} set:html={serializedData} />
