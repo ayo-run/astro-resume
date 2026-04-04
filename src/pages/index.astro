@@ -17,7 +17,7 @@ export type Data = typeof data;
 <script>
 import { deserialize } from '../deserialize'
 import { parse } from 'devalue'
-import type { Data } from './index.astro'
+import { type Data } from './index.astro'
 
 const data = deserialize<Data>('my-data', parse)
 console.log(data)

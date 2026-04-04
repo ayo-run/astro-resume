@@ -6,9 +6,10 @@ import globals from 'globals'
 import { defineConfig, globalIgnores } from 'eslint/config'
 import stylistic from '@stylistic/eslint-plugin'
 import eslintPluginAstro from 'eslint-plugin-astro'
+import astroParser from 'astro-eslint-parser'
+import tseslint from 'typescript-eslint'
 
 export default defineConfig([
-  ...eslintPluginAstro.configs.recommended,
   {
     files: ['**/*.css'],
     plugins: {
@@ -49,6 +50,16 @@ export default defineConfig([
       '@stylistic/object-curly-newline': ['error', {
         'consistent': true
       }]
+    }
+  },
+  ...eslintPluginAstro.configs.recommended,
+  {
+    files: ['**/*.astro'],
+    languageOptions: {
+      parser: astroParser,
+      parserOptions: {
+        parser: tseslint.parser
+      }
     }
   },
   globalIgnores(['**/dist', '**/**.d.ts'])
