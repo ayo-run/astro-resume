@@ -7,13 +7,13 @@
     "url": "https://github.com/ayo-run/astro-resume"
   },
   "type": "module",
-  "version": "0.4.5",
+  "version": "0.4.6",
   "keywords": [
     "astro-component",
     "css",
     "ui"
   ],
- "license": "MIT",
+  "license": "MIT",
   "exports": {
     ".": "./index.ts",
     "./*": "./*"
