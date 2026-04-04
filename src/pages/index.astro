@@ -15,30 +15,30 @@ export type Data = typeof data;
 <Serialize data={data} id="my-data" use={stringify} />
 
 <script>
-  import { deserialize } from "../deserialize";
-  import { parse } from "devalue";
-  import type { Data } from "./index.astro";
+import { deserialize } from '../deserialize'
+import { parse } from 'devalue'
+import type { Data } from './index.astro'
 
-  const data = deserialize<Data>("my-data", parse);
-  console.log(data);
+const data = deserialize<Data>('my-data', parse)
+console.log(data)
 
-  Object.keys(data).forEach((key) =>
-    console.log(key, data[key], typeof data[key])
-  );
+Object.keys(data).forEach((key) =>
+  console.log(key, data[key], typeof data[key])
+)
 
-  // render table to render-here
-  const table = document.createElement("table");
-  const tbody = document.createElement("tbody");
-  table.appendChild(tbody);
-  Object.keys(data).forEach((key) => {
-    const tr = document.createElement("tr");
-    const tdKey = document.createElement("td");
-    const tdValue = document.createElement("td");
-    tdKey.textContent = key;
-    tdValue.textContent = data[key];
-    tr.appendChild(tdKey);
-    tr.appendChild(tdValue);
-    tbody.appendChild(tr);
-  });
-  document.getElementById("render-here").appendChild(table);
+// render table to render-here
+const table = document.createElement('table')
+const tbody = document.createElement('tbody')
+table.appendChild(tbody)
+Object.keys(data).forEach((key) => {
+  const tr = document.createElement('tr')
+  const tdKey = document.createElement('td')
+  const tdValue = document.createElement('td')
+  tdKey.textContent = key
+  tdValue.textContent = data[key]
+  tr.appendChild(tdKey)
+  tr.appendChild(tdValue)
+  tbody.appendChild(tr)
+})
+document.getElementById('render-here').appendChild(table)
 </script>

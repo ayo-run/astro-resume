@@ -5,8 +5,10 @@ import css from '@eslint/css'
 import globals from 'globals'
 import { defineConfig, globalIgnores } from 'eslint/config'
 import stylistic from '@stylistic/eslint-plugin'
+import eslintPluginAstro from 'eslint-plugin-astro'
 
 export default defineConfig([
+  ...eslintPluginAstro.configs.recommended,
   {
     files: ['**/*.css'],
     plugins: {
@@ -49,5 +51,5 @@ export default defineConfig([
       }]
     }
   },
-  globalIgnores(['**/dist'])
+  globalIgnores(['**/dist', '**/**.d.ts'])
 ])
