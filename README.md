@@ -4,7 +4,7 @@
 [![Package information: NPM license](https://img.shields.io/npm/l/@ayco/astro-resume)](https://www.npmjs.com/package/@ayco/astro-resume)
 [![Package information: NPM downloads](https://img.shields.io/npm/dt/@ayco/astro-resume)](https://www.npmjs.com/package/@ayco/astro-resume)
 
-Utilities for serializing data from server for use in the client.
+Utilities for serializing data from the server for use in the client.
 
 1. `Serialize` - Astro component that takes `id` and `data`
 1. `deserialize()` - a function for use in the client that takes an `id` string and returns the `data` object
