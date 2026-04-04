@@ -1,5 +1,6 @@
 {
   "name": "@ayco/astro-resume",
+  "version": "0.4.6",
   "author": "Ayo Ayco",
   "homepage": "https://ayco.io/n/astro-resume",
   "repository": {
@@ -7,7 +8,6 @@
     "url": "https://github.com/ayo-run/astro-resume"
   },
   "type": "module",
-  "version": "0.4.6",
   "keywords": [
     "astro-component",
     "css",
@@ -28,5 +28,4 @@
   "peerDependencies": {
     "astro": "^6"
   }
-
 }
