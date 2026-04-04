@@ -1,5 +1,5 @@
 ---
-import Serialize from "../Serialize.astro";
+import Serialize from "@ayco/astro-resume";
 import { stringify } from "devalue";
 const data = {
   nameStr: "John Doe",
@@ -15,9 +15,9 @@ export type Data = typeof data;
 <Serialize data={data} id="my-data" use={stringify} />
 
 <script>
-import { deserialize } from '../deserialize'
+import { deserialize } from '@ayco/astro-resume'
 import { parse } from 'devalue'
-import { type Data } from './index.astro'
+import type { Data } from './index.astro'
 
 const data = deserialize<Data>('my-data', parse)
 console.log(data)

@@ -1,41 +1,16 @@
 {
-  "name": "@ayco/astro-resume",
-  "author": "Ayo Ayco",
-  "homepage": "https://ayco.io/n/astro-resume",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ayo-run/astro-resume"
-  },
+  "name": "monorepo",
+  "private": true,
   "type": "module",
   "version": "0.4.5",
-  "keywords": [
-    "astro-component",
-    "css",
-    "ui"
-  ],
+  "author": "Ayo",
   "scripts": {
-    "astro": "astro",
-    "dev": "astro telemetry disable && astro dev",
-    "start": "astro telemetry disable && astro dev",
-    "build": "astro telemetry disable && astro build",
-    "preview": "astro preview",
-    "build:preview": "npm run build && npm run preview",
-    "publish:patch": "npm version patch && npm publish --access public",
-    "publish:minor": "npm version minor && npm publish --access public",
     "prepare": "husky",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
-  "license": "MIT",
-  "exports": {
-    ".": "./index.ts"
-  },
-  "files": [
-    "src/Serialize.astro",
-    "src/deserialize.ts",
-    "index.ts"
-  ],
   "devDependencies": {
+    "@ayco/astro-resume": "workspace:*",
     "@eslint/css": "^1.1.0",
     "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^5.10.0",
@@ -46,8 +21,5 @@
     "globals": "^17.4.0",
     "husky": "^9.1.7",
     "typescript-eslint": "^8.58.0"
-  },
-  "peerDependencies": {
-    "astro": "^6"
   }
 }

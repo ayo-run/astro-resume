@@ -1,0 +1,31 @@
+{
+  "name": "@ayco/astro-resume",
+  "author": "Ayo Ayco",
+  "homepage": "https://ayco.io/n/astro-resume",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ayo-run/astro-resume"
+  },
+  "type": "module",
+  "version": "0.4.5",
+  "keywords": [
+    "astro-component",
+    "css",
+    "ui"
+  ],
+ "license": "MIT",
+  "exports": {
+    ".": "./index.ts",
+    "./*": "./*"
+  },
+  "files": [
+    "Serialize.astro",
+    "deserialize.ts",
+    "index.ts",
+    "LICENSE",
+    "README.md"
+  ],
+  "peerDependencies": {
+    "astro": "^6"
+  }
+}
