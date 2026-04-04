@@ -5,6 +5,7 @@
   "version": "0.4.5",
   "author": "Ayo",
   "scripts": {
+    "dev": "cd demo && npm run dev",
     "prepare": "husky",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
