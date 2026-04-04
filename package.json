@@ -13,15 +13,6 @@
     "css",
     "ui"
   ],
-  "license": "MIT",
-  "exports": {
-    ".": "./index.ts"
-  },
-  "files": [
-    "src/Serialize.astro",
-    "src/deserialize.ts",
-    "index.ts"
-  ],
   "scripts": {
     "astro": "astro",
     "dev": "astro telemetry disable && astro dev",
@@ -31,10 +22,26 @@
     "build:preview": "npm run build && npm run preview",
     "publish:patch": "npm version patch && npm publish --access public",
     "publish:minor": "npm version minor && npm publish --access public",
-    "prepare": "husky"
+    "prepare": "husky",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
+  "license": "MIT",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "files": [
+    "src/Serialize.astro",
+    "src/deserialize.ts",
+    "index.ts"
+  ],
   "devDependencies": {
+    "@eslint/css": "^1.1.0",
+    "@eslint/js": "^10.0.1",
+    "@stylistic/eslint-plugin": "^5.10.0",
     "devalue": "^5.6.4",
+    "eslint": "^10.2.0",
+    "globals": "^17.4.0",
     "husky": "^9.1.7"
   },
   "peerDependencies": {
