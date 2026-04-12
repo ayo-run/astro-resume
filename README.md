@@ -183,13 +183,13 @@ The `deserialize()` function may give you the following:
 
 ## About
 
-This is a quick and easy pattern to embed serialized information into your HTML and make it available in the client-side script with type safety.
+This is a quick and easy pattern to embed serialized information into your HTML and make it available in the client-side script. This doesn't require client-side JS and directly embeds the data on your HTML.
 
 The `Serialize` component will write the data as JSON wrapped in a `<script type="application/json">` element to hold the string.
 
 The `deserialize()` function can then parse the value string for use in your client script.
 
-There is also a pattern [given in the Astro docs](https://docs.astro.build/en/guides/client-side-scripts/#pass-frontmatter-variables-to-scripts) to use a Custom Element that takes a `data-` prop which properly protects the scope of your component. That is a good pattern to follow for complex applications that don't use UI frameworks.
+There is also a pattern [given in the Astro docs](https://docs.astro.build/en/guides/client-side-scripts/#pass-frontmatter-variables-to-scripts) to use a Custom Element that takes a `data-` prop which properly protects the scope of your component. It requires client-side JS.
 
 ## Trade-Off
 
