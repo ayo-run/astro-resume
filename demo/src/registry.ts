@@ -1,6 +1,5 @@
 export class SerializedRegistry {
-    private _registeredIds: string[]
-    constructor() {}
+    private _registeredIds: string[] = []
     get registeredIds() {
         return this._registeredIds;
     }

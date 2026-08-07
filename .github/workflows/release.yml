@@ -1,0 +1,68 @@
+name: Release
+
+# Tags are created by `pnpm release` (bumpp) and pushed to this remote.
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  changelog:
+    name: Changelog
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set node
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+
+      - run: npx changelogithub
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+  publish-npm:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      # Required for provenance: the OIDC token is what signs the attestation.
+      id-token: write
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          registry-url: 'https://registry.npmjs.org'
+          cache: pnpm
+
+      - name: Ensure npm supports trusted publishing
+        run: npm install -g npm@latest
+
+      - run: pnpm install --frozen-lockfile
+
+      # The package ships its sources (.astro/.ts), so there is nothing to
+      # build — but the tests and demo type-check gate the publish.
+      - run: pnpm lint
+      - run: pnpm test
+      - run: pnpm check
+
+      - name: Publish
+        working-directory: package
+        run: |
+          VERSION="$(node -p "require('./package.json').version")"
+          if [[ "$VERSION" == *-* ]]; then
+            TAG="${VERSION#*-}"; TAG="${TAG%%.*}"
+          else
+            TAG="latest"
+          fi
+          echo "Publishing $VERSION to dist-tag '$TAG'"
+          npm publish --provenance --access public --tag "$TAG"

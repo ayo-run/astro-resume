@@ -22,23 +22,23 @@ import type { Data } from './index.astro'
 const data = deserialize<Data>('my-data', parse)
 console.log(data)
 
-Object.keys(data).forEach((key) =>
-  console.log(key, data[key], typeof data[key])
-)
+const entries = Object.entries(data)
+
+entries.forEach(([key, value]) => console.log(key, value, typeof value))
 
 // render table to render-here
 const table = document.createElement('table')
 const tbody = document.createElement('tbody')
 table.appendChild(tbody)
-Object.keys(data).forEach((key) => {
+entries.forEach(([key, value]) => {
   const tr = document.createElement('tr')
   const tdKey = document.createElement('td')
   const tdValue = document.createElement('td')
   tdKey.textContent = key
-  tdValue.textContent = data[key]
+  tdValue.textContent = String(value)
   tr.appendChild(tdKey)
   tr.appendChild(tdValue)
   tbody.appendChild(tr)
 })
-document.getElementById('render-here').appendChild(table)
+document.getElementById('render-here')?.appendChild(table)
 </script>

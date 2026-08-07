@@ -199,6 +199,21 @@ That's nice and ideal (in my opinion), as we are aware of how the HTML is formed
 
 You have to manage the IDs (i.e., make sure they are unique) and understand that the `deserialize()` function will crawl the whole document incurring a minimal performance cost depending on how big your HTML is.
 
+## Development
+
+This repository is a pnpm workspace: `package/` is the published package and `demo/` is an Astro site that consumes it.
+
+```
+pnpm install
+pnpm dev      # run the demo site
+pnpm lint     # eslint
+pnpm test     # vitest (happy-dom for deserialize, Astro Container API for Serialize)
+pnpm check    # astro check on the demo
+pnpm release  # bumpp: bump package/package.json, commit, tag, push
+```
+
+`pnpm lint`, `pnpm test` and `pnpm check` are the three commands CI runs.
+
 ## Road Map
 
 See the [TODO tracker](https://todo.sr.ht/~ayoayco/astro-resume) for planned work items.

@@ -1,3 +1,9 @@
 packages:
   - "package"
   - "demo"
+
+# Astro pulls in esbuild and sharp; both need their install scripts to fetch or
+# build native binaries.
+allowBuilds:
+  esbuild: true
+  sharp: true
