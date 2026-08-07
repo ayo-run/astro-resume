@@ -26,6 +26,6 @@
     "README.md"
   ],
   "peerDependencies": {
-    "astro": "^6"
+    "astro": ">=4"
   }
 }
