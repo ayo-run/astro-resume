@@ -6,7 +6,7 @@
  * @see Usage examples in 👉 https://ayco.io/gh/astro-resume#usage
 **/
 export function deserialize<T = any>(id: string, parser?: (serialized: string) => any): T {
-    const elements = document.querySelectorAll<HTMLScriptElement>(`script#${id}[type="application/json"]`);
+    const elements = document.querySelectorAll<HTMLScriptElement>(`script#${CSS.escape(id)}[type="application/json"]`);
 
     if (elements?.length > 0) {
         if (elements?.length > 1)
