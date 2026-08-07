@@ -24,3 +24,6 @@ pnpm-debug.log*
 *~
 *swo
 *swp
+
+# generated at pack time from the root README
+package/README.md
