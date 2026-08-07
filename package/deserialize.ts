@@ -15,9 +15,13 @@ export function deserialize<T = unknown>(id: string, parser?: (serialized: strin
         const element = elements[0];
 
         if (element?.textContent)
+            try{
             return parser
                 ? parser(element.textContent)
                 : JSON.parse(element.textContent)
+            } catch (err) {
+                throw Error(`astro-resume ERR: Failed to parse data for "${id}".`, { cause: err })
+            }
     }
 
     throw Error(`astro-resume ERR: No match found.
@@ -26,6 +30,5 @@ export function deserialize<T = unknown>(id: string, parser?: (serialized: strin
     - The Serialize component is used with correct props
     - "data" prop is not undefined
     - "${id}" is the "id" of the Serialize component
-    See examples: https://ayco.io/gh/astro-resume#usage
-Stack trace: `)
+    See examples: https://ayco.io/gh/astro-resume#usage`)
 }
