@@ -5,13 +5,14 @@
   "homepage": "https://ayco.io/n/astro-resume",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ayo-run/astro-resume"
+    "url": "git+https://github.com/ayo-run/astro-resume.git"
   },
   "type": "module",
   "keywords": [
     "astro-component",
-    "css",
-    "ui"
+    "serialization",
+    "state",
+    "hydration"
   ],
   "license": "MIT",
   "exports": {
