@@ -17,7 +17,7 @@ export interface Props {
 const { id, data, use } = Astro.props;
 let serializedData = "{}";
 try {
-  serializedData = use ? use(data) : JSON.stringify(data);
+  serializedData = use ? use(data) : JSON.stringify(data).replace(/</g, '\\u003c');
 } catch (err) {
   /**
    *  ERR: data is unserializable
