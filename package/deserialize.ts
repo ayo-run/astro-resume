@@ -5,7 +5,7 @@
  * @returns The deserialized JSON data
  * @see Usage examples in 👉 https://ayco.io/gh/astro-resume#usage
 **/
-export function deserialize<T = any>(id: string, parser?: (serialized: string) => any): T {
+export function deserialize<T = unknown>(id: string, parser?: (serialized: string) => T): T {
     const elements = document.querySelectorAll<HTMLScriptElement>(`script#${CSS.escape(id)}[type="application/json"]`);
 
     if (elements?.length > 0) {
