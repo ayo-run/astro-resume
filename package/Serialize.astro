@@ -32,6 +32,26 @@ try {
     { cause: err }
   );
 }
+
+/**
+ * Backstop against a breakout. The default serializer escapes every "<", so
+ * this can only fire for a custom `use` serializer that does not — whose
+ * output is written to the page unchanged, by design, so that serializers
+ * which emit their own format are not corrupted.
+ *
+ * Refusing to render is the safe failure: the alternative is a page that
+ * silently executes whatever was in the data.
+ */
+if (/<\/script/i.test(serializedData)) {
+  throw Error(
+    `astro-resume ERR: Serialized data contains "</script"
+- That would close the script element early and run the rest as HTML
+- The default serializer escapes "<", so this came from a custom "use" serializer
+- Use one that escapes "<" itself — devalue does
+- See 👉 https://ayco.io/gh/astro-resume#escaping--xss
+    `
+  );
+}
 ---
 
 <script type="application/json" id={id} set:html={serializedData} />

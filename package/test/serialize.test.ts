@@ -117,6 +117,68 @@ describe('Serialize', () => {
 
       expect(body).not.toContain('</script')
     })
+
+    describe('custom serializer backstop', () => {
+      /** A serializer that forgets to escape — what the guard exists for. */
+      const unsafe = (data: Record<string, unknown>) => JSON.stringify(data)
+
+      it('refuses to render when a custom serializer emits "</script"', async () => {
+        await expect(render({
+          id: 'evil', data: {
+            evil: breakout
+          }, use: unsafe
+        })).rejects.toThrow('Serialized data contains "</script"')
+      })
+
+      it.each([
+        ['lowercase', '</script>'],
+        ['uppercase', '</SCRIPT>'],
+        ['mixed case', '</ScRiPt>'],
+        ['no trailing ">"', '</script']
+      ])('catches %s', async (_label, payload) => {
+        await expect(render({
+          id: 'evil', data: {
+            payload
+          }, use: unsafe
+        })).rejects.toThrow('astro-resume ERR')
+      })
+
+      it('points at the custom serializer rather than blaming the data', async () => {
+        await expect(render({
+          id: 'evil', data: {
+            evil: breakout
+          }, use: unsafe
+        })).rejects.toThrow(/custom "use" serializer/)
+      })
+
+      it('stays out of the way of a serializer that escapes', async () => {
+        const body = scriptBody(await render({
+          id: 'ok', data: {
+            evil: breakout, when: new Date(0)
+          }, use: stringify
+        }))
+
+        expect(body).toBe(stringify({
+          evil: breakout, when: new Date(0)
+        }))
+      })
+
+      it('never fires on the default serializer', async () => {
+        const body = scriptBody(await render({
+          id: 'ok', data: {
+            evil: breakout, nested: {
+              also: '</script>'
+            }
+          }
+        }))
+
+        expect(JSON.parse(body)).toEqual({
+          evil: breakout, nested: {
+            also: '</script>'
+          }
+        })
+      })
+    })
   })
 
   it('uses a custom serializer when `use` is given', async () => {

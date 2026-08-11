@@ -40,17 +40,11 @@ therefore small and specific.
 - Any way to break out of the `<script>` element that `Serialize` writes — that
   is, a payload reaching the page unescaped through the default serializer.
 - `deserialize()` returning data from an element other than the one requested.
-
-**Known gap — reports still welcome:**
-
-- **A custom serializer passed as `use` is not escaped for you.** Its return
-  value is written to the page unchanged, so a serializer that does not escape
-  `<` can break out of the `<script>` element. This is documented under
-  [Escaping & XSS][xss], and `devalue` — the serializer the docs recommend —
-  escapes correctly. Documentation is not a fix, though: `use` reads as a
-  serializer choice rather than as opting out of an XSS defence, and nothing
-  warns at runtime. Treat this as a gap that is intended to close, not as
-  settled design.
+- A payload from a custom `use` serializer that escapes the element. Its return
+  value is written to the page unchanged, so that a serializer emitting its own
+  format is not corrupted — but `Serialize` refuses to render if the result
+  still contains `</script`, so the direct breakout fails loudly instead of
+  shipping. A way past that backstop is in scope. See [Escaping & XSS][xss].
 
 **Out of scope:**
 

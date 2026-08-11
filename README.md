@@ -186,7 +186,7 @@ console.log(now instanceof Date); // true
 </script>
 ```
 
-Note that a custom serializer's output is written to the page as-is, so it has to do its own escaping — see below. `devalue` does.
+Note that a custom serializer's output is written to the page as-is, so it has to do its own escaping — see below. `devalue` does. If it doesn't, `Serialize` refuses to render rather than shipping a breakout.
 
 ## Escaping & XSS
 
@@ -203,7 +203,9 @@ Serialized data is written inside a `<script>` element, so a string like `</scri
 
 Two limits worth knowing:
 
-1. **Custom serializers are not escaped for you.** When you pass `use`, its return value is written to the page unchanged. Use a serializer that escapes `<` itself — [`devalue`](https://github.com/Rich-Harris/devalue) does.
+1. **Custom serializers are not escaped for you.** When you pass `use`, its return value is written to the page unchanged, so that a serializer emitting its own format is not corrupted. Use one that escapes `<` itself — [`devalue`](https://github.com/Rich-Harris/devalue) does.
+
+   As a backstop, `Serialize` throws rather than rendering if the serialized output still contains `</script`, so an unescaping serializer fails loudly at render time instead of shipping an XSS. That check is a targeted one, not a full model of HTML script parsing — a serializer that escapes `<` is still the thing to rely on.
 1. **This protects the payload, not what you do with it.** Data you take out of `deserialize()` and put back into the DOM still needs the usual care — prefer `textContent` over `innerHTML`.
 
 ## Errors & Warning in `deserialize()`
