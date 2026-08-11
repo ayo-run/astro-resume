@@ -1,6 +1,6 @@
 {
   "name": "@ayco/astro-resume",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Ayo Ayco",
   "homepage": "https://ayco.io/n/astro-resume",
   "description": "Type-safe server-to-client data in Astro",
