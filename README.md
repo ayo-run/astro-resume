@@ -5,7 +5,7 @@
 [![Package information: NPM downloads](https://img.shields.io/npm/dt/@ayco/astro-resume)](https://www.npmjs.com/package/@ayco/astro-resume)
 
 > [!Note]
-> **⚠️ Breaking change in v1** — `deserialize<T>` now defaults to `unknown` instead of `any`, so a call without a type argument no longer type-checks when you read properties off the result. See [Upgrading to v1](#upgrading-to-v1).
+> **New in v1** — `deserialize<T>` now defaults to `unknown` instead of `any`, so a call without a type argument no longer type-checks when you read properties off the result. See [Upgrading to v1](#upgrading-to-v1).
 
 Utilities for serializing data from the server for use in the client.
 
