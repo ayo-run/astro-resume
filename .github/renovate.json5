@@ -1,0 +1,47 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+
+  "extends": [
+    "config:recommended",
+
+    // Pins any newly added action to a commit SHA, and keeps the SHAs already
+    // in .github/workflows/ current. Renovate rewrites the trailing `# v6`
+    // comment along with the digest, so the files stay readable.
+    "helpers:pinGitHubActionDigests",
+
+    // Low-traffic library — one batch a month is plenty. Note this does not
+    // hold back security fixes: `vulnerabilityAlerts` ignores the schedule.
+    "schedule:monthly",
+  ],
+
+  // Matches the repo's Conventional Commits history (`chore(ci):`, `chore(pkg):`).
+  "semanticCommits": "enabled",
+  "semanticCommitType": "chore",
+
+  "packageRules": [
+    {
+      // The reason this repo needs its own rule: astro-resume is a library, and
+      // `astro: ">=4"` is a peer range. `widen` extends it rather than replacing
+      // it, so a new Astro major does not silently drop support for older ones.
+      "matchDepTypes": ["peerDependencies"],
+      "rangeStrategy": "widen",
+    },
+    {
+      // The package ships zero runtime dependencies — everything else is dev
+      // tooling, so one grouped PR beats five.
+      "matchDepTypes": ["devDependencies"],
+      "groupName": "dev dependencies",
+      "rangeStrategy": "bump",
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "groupName": "github-actions",
+    },
+    {
+      // .nvmrc is deliberately `lts/*`. Pinning it is a support-matrix decision,
+      // not a maintenance one, so it should not arrive as an automated PR.
+      "matchDatasources": ["node-version"],
+      "enabled": false,
+    },
+  ],
+}

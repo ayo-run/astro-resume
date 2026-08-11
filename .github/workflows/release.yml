@@ -6,6 +6,11 @@ on:
     tags:
       - 'v*'
 
+# Default-deny floor: every job below grants back only what it needs, so a new
+# job added to this file cannot silently inherit a write token.
+permissions:
+  contents: read
+
 jobs:
   changelog:
     name: Changelog
@@ -13,16 +18,20 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           fetch-depth: 0
+          # changelogithub reads history locally and talks to the API with
+          # GITHUB_TOKEN from the environment; it never pushes, so the job has
+          # no use for a git credential left behind in .git/config.
+          persist-credentials: false
 
       - name: Set node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version-file: .nvmrc
 
-      - run: npx changelogithub
+      - run: npx changelogithub@15.0.4
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
@@ -34,18 +43,22 @@ jobs:
       # Required for provenance: the OIDC token is what signs the attestation.
       id-token: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
 
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version-file: .nvmrc
           registry-url: 'https://registry.npmjs.org'
           cache: pnpm
 
+      # Pinned rather than `npm@latest`: this job holds `id-token: write`, so a
+      # bad npm release here could sign provenance as us. Bump deliberately.
       - name: Ensure npm supports trusted publishing
-        run: npm install -g npm@latest
+        run: npm install -g npm@12.0.2
 
       - run: pnpm install --frozen-lockfile
 

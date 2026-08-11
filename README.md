@@ -4,6 +4,9 @@
 [![Package information: NPM license](https://img.shields.io/npm/l/@ayco/astro-resume)](https://www.npmjs.com/package/@ayco/astro-resume)
 [![Package information: NPM downloads](https://img.shields.io/npm/dt/@ayco/astro-resume)](https://www.npmjs.com/package/@ayco/astro-resume)
 
+> [!Warning]
+> **On v0? Upgrade.** Every version before `1.0.0` writes serialized data to the page without escaping `<`, so a string containing `</script>` in your data closes the element early and the rest runs as HTML. If any of that data comes from user input, treat it as exploitable. Fixed in `1.0.0`, whose only breaking change is a TypeScript one — see [Escaping & XSS](#escaping--xss) and [Upgrading to v1](#upgrading-to-v1).
+
 > [!Note]
 > **New in v1** — `deserialize<T>` now defaults to `unknown` instead of `any`, so a call without a type argument no longer type-checks when you read properties off the result. See [Upgrading to v1](#upgrading-to-v1).
 
@@ -277,7 +280,7 @@ Calls that only move the value around — logging it, handing it to something el
 
 Everything else in v1 is backwards compatible:
 
-- `<` in the serialized output is escaped as `\u003c`, so data can no longer break out of the `<script>` element. This changes the bytes on the page, not the value you get back. See [Escaping & XSS](#escaping--xss).
+- **Security fix — the reason to upgrade even if you have no type errors.** `<` in the serialized output is escaped as `\u003c`, so data can no longer break out of the `<script>` element. v0 did not escape it at all, so data containing `</script>` could run as HTML. This changes the bytes on the page, not the value you get back. See [Escaping & XSS](#escaping--xss).
 - IDs that are not valid CSS identifiers are escaped with `CSS.escape`, so they now match instead of throwing "No match found".
 - A failed parse throws its own error naming the ID, with the parser's `SyntaxError` as `cause`, instead of the bare parser error.
 - Errors from `Serialize` carry the original error as `cause`. Previously it was passed as a second argument to `Error()` and silently dropped.
