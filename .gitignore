@@ -27,3 +27,6 @@ pnpm-debug.log*
 
 # generated at pack time from the root README
 package/README.md
+
+# actionlint binary cache (scripts/lint-workflows.sh)
+.cache/
