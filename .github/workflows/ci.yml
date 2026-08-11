@@ -40,6 +40,33 @@ jobs:
       - name: Astro check (demo)
         run: pnpm check
 
+      # Publishing no runtime dependencies is what keeps a consumer's tree
+      # clean no matter what this repo's dev lockfile carries. Assert that
+      # invariant rather than audit it.
+      #
+      # `pnpm audit --prod` was the obvious check here and is the wrong one:
+      # audit reads the whole workspace lockfile and ignores --filter, so its
+      # "production" scope is the demo app's 182-package Astro tree and none
+      # of what we publish. Pinning the demo back to astro 6.1.3 turns it red
+      # with `demo>astro` paths — a failure that tells a user nothing.
+      #
+      # Nor could any audit here speak for consumers: they reach Astro through
+      # the `astro: ">=4"` peer range, resolved against their own install, and
+      # nothing in this lockfile models that.
+      - name: Assert the package ships no runtime dependencies
+        run: |
+          node -e '
+            const pkg = require("./package/package.json");
+            const deps = Object.keys(pkg.dependencies ?? {});
+            if (deps.length > 0) {
+              console.error(`Runtime dependencies added: ${deps.join(", ")}`);
+              console.error("Consumers now inherit these, so they need auditing.");
+              console.error("Add a real audit step alongside this assertion.");
+              process.exit(1);
+            }
+            console.log("OK: no runtime dependencies, nothing reaches consumers");
+          '
+
   workflows:
     name: Lint workflows
     runs-on: ubuntu-latest

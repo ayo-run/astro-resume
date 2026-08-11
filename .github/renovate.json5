@@ -29,8 +29,26 @@
     {
       // The package ships zero runtime dependencies — everything else is dev
       // tooling, so one grouped PR beats five.
+      //
+      // That is also why an advisory against this repo is almost always dev
+      // surface: it reaches contributors and CI, not anyone who installs the
+      // package. CI asserts that zero-runtime-dependency invariant directly;
+      // no audit of this lockfile can speak for consumers, since they reach
+      // Astro through the peer range and their own install.
+      // Renovate cannot scope `vulnerabilityAlerts` by depType — it is a
+      // top-level option only — so dev advisories will still open a PR off
+      // schedule. Triage them as tooling updates, not as user-facing fixes.
       "matchDepTypes": ["devDependencies"],
       "groupName": "dev dependencies",
+      "rangeStrategy": "bump",
+    },
+    {
+      // Nothing matches this today. It exists so that the first runtime
+      // dependency ever added is handled on its own, rather than being swept
+      // into the monthly dev batch — a runtime dep is the only kind that ends
+      // up in a consumer's tree, so it deserves its own PR and its own read.
+      "matchDepTypes": ["dependencies"],
+      "groupName": null,
       "rangeStrategy": "bump",
     },
     {
