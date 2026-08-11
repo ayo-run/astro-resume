@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "Ayo Ayco",
   "homepage": "https://ayco.io/n/astro-resume",
-  "description: "Type-safe server-to-client data in Astro",
+  "description": "Type-safe server-to-client data in Astro",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ayo-run/astro-resume.git"
