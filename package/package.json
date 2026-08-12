@@ -6,7 +6,12 @@
   "description": "Type-safe server-to-client data in Astro",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ayo-run/astro-resume.git"
+    "url": "git+https://github.com/ayo-run/astro-resume.git",
+    "directory": "package"
+  },
+  "bugs": {
+    "url": "https://github.com/ayo-run/astro-resume/issues",
+    "email": "~ayoayco/astro-resume@todo.sr.ht"
   },
   "type": "module",
   "keywords": [
@@ -25,6 +30,9 @@
   "exports": {
     ".": "./index.ts",
     "./*": "./*"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "files": [
     "Serialize.astro",

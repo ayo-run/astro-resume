@@ -4,6 +4,11 @@
 [![Package information: NPM license](https://img.shields.io/npm/l/@ayco/astro-resume)](https://www.npmjs.com/package/@ayco/astro-resume)
 [![Package information: NPM downloads](https://img.shields.io/npm/dt/@ayco/astro-resume)](https://www.npmjs.com/package/@ayco/astro-resume)
 
+[![CI](https://github.com/ayo-run/astro-resume/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/ayo-run/astro-resume/actions/workflows/ci.yml)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/ayo-run/astro-resume/badge)](https://scorecard.dev/viewer/?uri=github.com/ayo-run/astro-resume)
+[![Socket](https://badge.socket.dev/npm/package/@ayco/astro-resume/latest)](https://socket.dev/npm/package/@ayco/astro-resume)
+[![Runtime dependencies](https://img.shields.io/badge/runtime%20dependencies-0-brightgreen)](https://www.npmjs.com/package/@ayco/astro-resume?activeTab=dependencies)
+
 > [!Warning]
 > **On v0? Upgrade.** Every version before `1.0.0` writes serialized data to the page without escaping `<`, so a string containing `</script>` in your data closes the element early and the rest runs as HTML. If any of that data comes from user input, treat it as exploitable. Fixed in `1.0.0`, whose only breaking change is a TypeScript one — see [Escaping & XSS](#escaping--xss) and [Upgrading to v1](#upgrading-to-v1).
 
@@ -294,4 +299,4 @@ See the [TODO tracker](https://todo.sr.ht/~ayoayco/astro-resume) for planned wor
 
 ## Reporting Issues
 
-To report issues or request features, send a plain text email to [~ayoayco/astro-resume@todo.sr.ht](mailto:~ayoayco/astro-resume@todo.sr.ht) or file a ticket via [SourceHut](https://todo.sr.ht/~ayoayco/astro-resume)
+To report issues or request features, open a ticket on [GitHub](https://github.com/ayo-run/astro-resume/issues), or send a plain text email to [~ayoayco/astro-resume@todo.sr.ht](mailto:~ayoayco/astro-resume@todo.sr.ht)
