@@ -12,7 +12,7 @@
     "test": "pnpm --filter @ayco/astro-resume test",
     "test:watch": "pnpm --filter @ayco/astro-resume test:watch",
     "check": "pnpm --filter demo check",
-    "release": "bumpp package/package.json && git push gh --follow-tags"
+    "release": "bumpp package/package.json"
   },
   "devDependencies": {
     "@ayco/astro-resume": "workspace:*",
