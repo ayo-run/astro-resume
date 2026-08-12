@@ -71,6 +71,33 @@ jobs:
             console.log("OK: no runtime dependencies, nothing reaches consumers");
           '
 
+      # npm builds the tarball and then RE-READS package.json to get the
+      # manifest it sends to the registry — "so that we send the latest and
+      # greatest thing", per npm's own publish source. That re-read happens
+      # after `postpack`.
+      #
+      # So a `postpack` that deleted the README `prepack` had just copied in
+      # would leave the tarball correct and the *manifest* empty: the registry
+      # stores `readme: "ERROR: No README data found!"` and the npm page renders
+      # blank. That is what every release up to and including v1.1.0 shipped.
+      #
+      # Asserting on the tarball would not have caught it — the tarball had the
+      # README the whole time. Assert instead that the README is still on disk
+      # once packing is done, because that is the state npm publishes from.
+      - name: Assert the published manifest will carry a README
+        working-directory: package
+        run: |
+          rm -f README.md
+          npm pack --dry-run > /dev/null
+          if [ ! -s README.md ]; then
+            echo "package/README.md is absent or empty after packing."
+            echo "npm re-reads the manifest at this point, so the registry"
+            echo "would receive no README and the npm page would be blank."
+            echo "Look for a postpack script that removes it."
+            exit 1
+          fi
+          echo "OK: README survives packing, so the published manifest carries it"
+
   workflows:
     name: Lint workflows
     runs-on: ubuntu-latest
