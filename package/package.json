@@ -24,8 +24,7 @@
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
-    "prepack": "cp ../README.md ./README.md",
-    "postpack": "rm -f ./README.md"
+    "prepack": "cp ../README.md ./README.md"
   },
   "exports": {
     ".": "./index.ts",

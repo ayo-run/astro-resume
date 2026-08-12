@@ -6,7 +6,6 @@
 
 [![CI](https://github.com/ayo-run/astro-resume/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/ayo-run/astro-resume/actions/workflows/ci.yml)
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/ayo-run/astro-resume/badge)](https://scorecard.dev/viewer/?uri=github.com/ayo-run/astro-resume)
-[![Socket](https://badge.socket.dev/npm/package/@ayco/astro-resume/latest)](https://socket.dev/npm/package/@ayco/astro-resume)
 [![Runtime dependencies](https://img.shields.io/badge/runtime%20dependencies-0-brightgreen)](https://www.npmjs.com/package/@ayco/astro-resume?activeTab=dependencies)
 
 > [!Warning]
