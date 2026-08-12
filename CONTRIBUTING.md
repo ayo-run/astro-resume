@@ -44,7 +44,7 @@ Breaking changes take a `!`. So, a new breaking feature would have `feat!:` and 
 
 ## Review
 
-Every change is reviewed before it lands on our `main` branch, including changes written by the maintainer's tooling. Expect questions about scope and handling older Astro versions.
+Every contribution change is reviewed before it lands on our `main` branch, including changes written by the maintainer's tooling. Expect questions about scope and handling older Astro versions.
 
 ## License
 
